@@ -1,3 +1,10 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+  }
+}
 resource "aws_vpc" "this" {
    cidr_block           = var.cidr_block
    enable_dns_hostnames = true
@@ -49,3 +56,5 @@ resource "aws_vpc" "this" {
      var.public_subnet_tags
    )
  }
+
+ 
