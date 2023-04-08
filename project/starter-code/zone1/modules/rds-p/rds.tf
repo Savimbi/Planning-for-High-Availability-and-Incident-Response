@@ -49,6 +49,11 @@ resource "aws_rds_cluster" "udacity_cluster" {
   storage_encrypted        = false
   backup_retention_period = 5
   depends_on = [aws_rds_cluster_parameter_group.cluster_pg]
+    lifecycle {
+    ignore_changes = [
+      availability_zones,
+    ]
+  } 
 }
 
 output "db_cluster_arn" {
@@ -66,6 +71,11 @@ resource "aws_rds_cluster_instance" "udacity_instance" {
   instance_class       = "db.t2.small"
   engine               = "aurora-mysql"
   db_subnet_group_name = aws_db_subnet_group.udacity_db_subnet_group.name
+    lifecycle {
+    ignore_changes = [
+      cluster_identifier,
+    ]
+  } 
 }
 
 resource "aws_security_group" "db_sg_1" {
